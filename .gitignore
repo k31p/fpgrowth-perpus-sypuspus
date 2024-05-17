@@ -1,3 +1,9 @@
+# Ignore vscode settings
+.vscode
+
+# Ignore build files
+build/
+
 # Prerequisites
 *.d
 
