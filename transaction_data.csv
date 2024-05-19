@@ -1,0 +1,51 @@
+﻿transaction_number,categories
+1,literature
+2,"literature, historical"
+3,"novels, fiction"
+4,"classics, mystery"
+5,classics
+6,novels
+7,"literature, unfinished"
+8,"fiction, unfinished"
+9,classics
+10,"historical, classics"
+11,fiction
+12,"unfinished, literature"
+13,"novels, mystery"
+14,"historical, classics"
+15,literary-fiction
+16,fiction
+17,unfinished
+18,"mystery, literature"
+19,"mystery, literary-fiction"
+20,"novels, fiction"
+21,"historical, mystery"
+22,unfinished
+23,"unfinished, classics"
+24,novels
+25,"classics, unfinished"
+26,crime
+27,"literature, historical"
+28,historical
+29,crime
+30,"historical, unfinished"
+31,"historical, unfinished"
+32,"unfinished, literature"
+33,historical
+34,literature
+35,"unfinished, literature"
+36,historical
+37,mystery
+38,classics
+39,"historical, literary-fiction"
+40,"classics, novels"
+41,novels
+42,fiction
+43,"unfinished, novels"
+44,crime
+45,literature
+46,mystery
+47,historical
+48,classics
+49,fiction
+50,"literary-fiction, crime"

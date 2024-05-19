@@ -31,5 +31,12 @@ using FPTree = struct FPTree {
     std::vector<FPNode> children;
 };
 
+/**
+ * @brief Tipe data struct untuk merepresentasikan data transaksi
+*/
+using Transaction = struct Transaction {
+    int id = 0;
+    std::vector<std::string> categories;
+};
 
 #endif

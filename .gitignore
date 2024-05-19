@@ -32,6 +32,10 @@ build/
 *.a
 *.lib
 
+# Windows C++ Compiler output files
+*.ilk
+*.pdb
+
 # Executables
 *.exe
 *.out
