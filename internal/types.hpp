@@ -17,18 +17,18 @@ using Book = struct Book {
 /**
  * @brief Tipe data struct untuk merepresentasikan data transaksi
 */
+
 using FPNode = struct FPNode {
     std::string info = "";
     int frequency = 0;
-    std::vector<FPNode> children;
+    std::unordered_map<std::string, FPNode> childrens;
 };
 
 /**
  * @brief Tipe data struct untuk merepresentasikan FPTree
 */
 using FPTree = struct FPTree {
-    int count = 0;
-    std::vector<FPNode> children;
+    std::unordered_map<std::string, FPNode> childrens;
 };
 
 /**
