@@ -4,8 +4,7 @@
 #define MINIMUM_SUPPORT_COUNT 5
 
 #include "types.hpp"
-#include <iostream>
-#include <iterator>
+#include <algorithm>
 #include <vector>
 #include <unordered_map>
 
@@ -130,6 +129,48 @@ FPTree createFPTree(const std::vector<Transaction> &transactions, const std::uno
     }
 
     return tree;
+}
+
+/**
+ * @brief Print fpnode
+*/
+void traverseFPNode(const FPNode node){
+    std::cout << node.info << " ";
+        
+    // Call traverse again if childrens not empty
+    std::cout << "Child: ";
+    for (auto &it: node.childrens){
+        traverseFPNode(it.second);
+    }
+}
+
+/**
+ * @brief Print fptree
+*/
+void traverseFPTree(const FPTree tree){
+    for(auto &it: tree.childrens){
+        std::cout << "Currently selected: " << it.second.info << std::endl;
+        traverseFPNode(it.second);
+        std::cout << std::endl;
+    }
+}
+
+/**
+ * @brief Prosedur untuk mencari setiap kemungkinan rute dari suatu kategori
+ */
+void findRoutes(const FPNode &node, std::vector<std::string> &route, Routes &routes){
+    route.push_back(node.info);
+
+    if (node.childrens.empty()){
+        routes[route[0]] = route;
+        return;
+    }
+
+    for (auto &it: node.childrens){
+        findRoutes(it.second, route, routes);
+    }
+
+    route.pop_back();
 }
 
 #endif

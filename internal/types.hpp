@@ -39,4 +39,10 @@ using Transaction = struct Transaction {
     std::vector<std::string> categories;
 };
 
+/**
+ * @brief Tipe data struct untuk merepresentasikan data rute setiap kategori
+*/
+using Routes = std::unordered_map<std::string, std::vector<std::string>>;
+
+
 #endif

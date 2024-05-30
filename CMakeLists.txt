@@ -9,7 +9,7 @@ file(GLOB SOURCES
 link_libraries(
     ncurses
 )
-add_executable(${PROJECT_NAME} menu.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
