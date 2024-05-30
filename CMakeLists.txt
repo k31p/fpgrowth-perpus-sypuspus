@@ -5,7 +5,11 @@ file(GLOB SOURCES
     internal/*.hpp
     external/*.hpp
 )
-add_executable(${PROJECT_NAME} main.cpp)
+
+link_libraries(
+    ncurses
+)
+add_executable(${PROJECT_NAME} menu.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
