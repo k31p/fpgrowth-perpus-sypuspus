@@ -29,7 +29,7 @@ int main(){
     /**
      * STEP 2: Count item frequency
     */
-    std::unordered_map<std::string, int> item_frequency = countItemFrequency(transactions);
+    Categories item_frequency = countItemFrequency(transactions);
 
     clear();
     printf("Item Frequency\n");
@@ -90,7 +90,7 @@ int main(){
     /**
      * STEP 6: Construct FPTree
     */
-    FPTree fptree = createFPTree(transactions, item_frequency);
+    FPNode fptree = createFPTree(transactions, item_frequency);
 
     printf("FPTree\n");
     printf("======\n");

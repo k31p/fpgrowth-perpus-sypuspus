@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <map>
 
 /**
  * @brief Tipe data struct untuk mereprentasikan data buku
@@ -15,19 +16,18 @@ using Book = struct Book {
 };
 
 /**
+ * @brief Tipe data struct untuk merepresentasikan setiap kategori dan frekuensinya
+*/
+using Categories = std::map<std::string, int>;
+
+/**
  * @brief Tipe data struct untuk merepresentasikan data transaksi
 */
 
 using FPNode = struct FPNode {
     std::string info = "";
     int frequency = 0;
-    std::unordered_map<std::string, FPNode> childrens;
-};
-
-/**
- * @brief Tipe data struct untuk merepresentasikan FPTree
-*/
-using FPTree = struct FPTree {
+    FPNode *parent = nullptr;
     std::unordered_map<std::string, FPNode> childrens;
 };
 
@@ -42,7 +42,7 @@ using Transaction = struct Transaction {
 /**
  * @brief Tipe data struct untuk merepresentasikan data rute setiap kategori
 */
-using Routes = std::unordered_map<std::string, std::vector<std::string>>;
+using Route = std::vector<std::string>;
 
 
 #endif

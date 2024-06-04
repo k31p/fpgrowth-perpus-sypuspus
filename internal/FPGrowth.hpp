@@ -11,9 +11,8 @@
 /**
  * @brief Fungsi untuk menghitung frekuensi dari setiap item
  */
-std::unordered_map<std::string, int> countItemFrequency(const std::vector<Transaction>& transactions)
-{
-    std::unordered_map<std::string, int> item_frequency;
+Categories countItemFrequency(const std::vector<Transaction>& transactions){
+    Categories item_frequency;
 
     for (Transaction transaction : transactions)
     {
@@ -29,7 +28,7 @@ std::unordered_map<std::string, int> countItemFrequency(const std::vector<Transa
     return item_frequency;
 }
 
-std::vector<Transaction> eliminateTransactionsCategoriesBelowMinimumSupportCount(const std::vector<Transaction> &transactions, const std::unordered_map<std::string, int> &item_frequency)
+std::vector<Transaction> eliminateTransactionsCategoriesBelowMinimumSupportCount(const std::vector<Transaction> &transactions, const Categories &item_frequency)
 {
     std::vector<Transaction> filtered_transactions;
 
@@ -54,9 +53,9 @@ std::vector<Transaction> eliminateTransactionsCategoriesBelowMinimumSupportCount
 /**
  * @brief Fungsi untuk menghapus item yang tidak memenuhi minimum support count
  */
-std::unordered_map<std::string, int> removeItemsBelowMinimumSupportCount(const std::unordered_map<std::string, int> &item_frequency)
+Categories removeItemsBelowMinimumSupportCount(const Categories &item_frequency)
 {
-    std::unordered_map<std::string, int> filtered_item_frequency;
+    Categories filtered_item_frequency;
 
     for (auto it = item_frequency.begin(); it != item_frequency.end(); it++)
     {
@@ -70,7 +69,7 @@ std::unordered_map<std::string, int> removeItemsBelowMinimumSupportCount(const s
 /**
  * @brief Method untuk mengurutkan kategori dalam transaksi berdasarkan frekuensinya
  */
-void sortTransactionItemsByFrequency(std::vector<Transaction> &transactions, const std::unordered_map<std::string, int> &item_frequency)
+void sortTransactionItemsByFrequency(std::vector<Transaction> &transactions, Categories &item_frequency)
 {
     for (Transaction &transaction : transactions)
     {
@@ -82,9 +81,9 @@ void sortTransactionItemsByFrequency(std::vector<Transaction> &transactions, con
 /**
  * @brief Fungsi untuk membuat FP-Tree
  */
-FPTree createFPTree(const std::vector<Transaction> &transactions, const std::unordered_map<std::string, int> &item_frequency)
+FPNode createFPTree(const std::vector<Transaction> &transactions, Categories &item_frequency)
 {
-    FPTree tree;
+    FPNode rootNode;
 
     for (Transaction transaction : transactions)
     {
@@ -95,19 +94,20 @@ FPTree createFPTree(const std::vector<Transaction> &transactions, const std::uno
             // Check if current node is null
             if (current_node == nullptr)
             {
-                if (tree.childrens.find(transaction.categories[i]) == tree.childrens.end())
+                if (rootNode.childrens.find(transaction.categories[i]) == rootNode.childrens.end())
                 {
                     FPNode new_node;
                     new_node.info = transaction.categories[i];
                     new_node.frequency = 1;
-                    tree.childrens[transaction.categories[i]] = new_node;
+                    new_node.parent = &rootNode;
+                    rootNode.childrens[transaction.categories[i]] = new_node;
                 }
                 else
                 {
-                    tree.childrens[transaction.categories[i]].frequency++;
+                    rootNode.childrens[transaction.categories[i]].frequency++;
                 }
 
-                current_node = &tree.childrens[transaction.categories[i]];
+                current_node = &rootNode.childrens[transaction.categories[i]];
                 continue;
             }
 
@@ -117,6 +117,7 @@ FPTree createFPTree(const std::vector<Transaction> &transactions, const std::uno
                 FPNode new_node;
                 new_node.info = transaction.categories[i];
                 new_node.frequency = 1;
+                new_node.parent = current_node;
                 current_node->childrens[transaction.categories[i]] = new_node;
             }
             else
@@ -128,7 +129,7 @@ FPTree createFPTree(const std::vector<Transaction> &transactions, const std::uno
         }
     }
 
-    return tree;
+    return rootNode;
 }
 
 /**
@@ -147,8 +148,8 @@ void traverseFPNode(const FPNode node){
 /**
  * @brief Print fptree
 */
-void traverseFPTree(const FPTree tree){
-    for(auto &it: tree.childrens){
+void traverseFPTree(const FPNode node){
+    for(auto &it: node.childrens){
         std::cout << "Currently selected: " << it.second.info << std::endl;
         traverseFPNode(it.second);
         std::cout << std::endl;
@@ -158,19 +159,8 @@ void traverseFPTree(const FPTree tree){
 /**
  * @brief Prosedur untuk mencari setiap kemungkinan rute dari suatu kategori
  */
-void findRoutes(const FPNode &node, std::vector<std::string> &route, Routes &routes){
-    route.push_back(node.info);
+std::unordered_map<std::string, Route> createRoutePattern(const FPNode node, Categories categories){
 
-    if (node.childrens.empty()){
-        routes[route[0]] = route;
-        return;
-    }
-
-    for (auto &it: node.childrens){
-        findRoutes(it.second, route, routes);
-    }
-
-    route.pop_back();
 }
 
 #endif
