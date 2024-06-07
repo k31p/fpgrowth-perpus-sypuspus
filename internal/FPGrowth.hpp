@@ -135,13 +135,19 @@ FPNode createFPTree(const std::vector<Transaction> &transactions, Categories &it
 /**
  * @brief Print fpnode
 */
-void traverseFPNode(const FPNode node){
-    std::cout << node.info << " ";
+void traverseFPNode(const FPNode node, int &level){
+    // Print garis untuk setiap node
+    std::cout << "|" << std::endl << "| ";
+    for (int stripes = 1; stripes <= level; stripes++){
+        std::cout << "-";
+    }
+    
+    std::cout << " " << node.info << std::endl;
         
     // Call traverse again if childrens not empty
-    std::cout << "Child: ";
+    level++;
     for (auto &it: node.childrens){
-        traverseFPNode(it.second);
+        traverseFPNode(it.second, level);
     }
 }
 
@@ -150,17 +156,72 @@ void traverseFPNode(const FPNode node){
 */
 void traverseFPTree(const FPNode node){
     for(auto &it: node.childrens){
-        std::cout << "Currently selected: " << it.second.info << std::endl;
-        traverseFPNode(it.second);
+        int level = 1;
+        std::cout << it.second.info << std::endl;
+        traverseFPNode(it.second, level);
         std::cout << std::endl;
     }
 }
 
 /**
- * @brief Prosedur untuk mencari setiap kemungkinan rute dari suatu kategori
- */
-std::unordered_map<std::string, Route> createRoutePattern(const FPNode node, Categories categories){
+ * @brief Prosedur untuk melakukan pencarian rute secara rekursif, TIDAK UNTUK DIGUNAKAN LANGSUNG!!!
+*/
+void recursiveFindRoute(std::vector<Route> &tempRoutes, FPNode *currentNode, std::vector<std::string> &currentPath, const std::string criteria){
+    if(currentNode == nullptr){
+        return;
+    }
 
+    // Tambah kategori ke dalam path sementara
+    currentPath.push_back(currentNode->info);
+
+    // Cek jika kategori yang dicari ditemukan
+    if(currentNode->info == criteria){
+        // Tambahkan rute ke map
+        tempRoutes.push_back(currentPath);
+        currentNode = nullptr;
+        return;
+    } 
+
+    // Cek jika children pada node mempunyai kategori yang dicari
+    if(currentNode->childrens.find(criteria) != currentNode->childrens.end()){
+        // Langsung tambahkan rute ke map
+        tempRoutes.push_back(currentPath);
+        currentNode = nullptr;
+        return;
+    } else {
+        // Lakukan pencarian ke anak secara rekursif
+        for(auto &it: currentNode->childrens){
+            currentNode = &it.second;
+            recursiveFindRoute(tempRoutes, currentNode, currentPath, criteria);
+        }
+    }
+}
+
+/**
+ * @brief Fungsi untuk mencari setiap kemungkinan rute dari suatu kategori
+ */
+std::unordered_map<std::string, std::vector<Route>> createRoutePattern(FPNode &rootNode, const Categories categories){
+    // Routes to return later
+    std::unordered_map<std::string, std::vector<Route>> routes;
+    
+    // Loop setiap kategori yang ada
+    for(auto &categoryMap: categories){
+        // Variable to temporarily store routes
+        std::vector<Route> tempRoutes;
+        
+        // Loop every root node's childrens
+        for(auto &nodeMap: rootNode.childrens){
+            FPNode *currentNode = &nodeMap.second;
+            Route currentPath;
+
+            recursiveFindRoute(tempRoutes, currentNode, currentPath, categoryMap.first);
+        }
+
+        routes[categoryMap.first] = tempRoutes;
+    }
+    
+
+    return routes;
 }
 
 #endif

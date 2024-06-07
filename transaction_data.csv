@@ -1,51 +1,51 @@
-﻿transaction_number,categories
-1,literature
-2,"literature, historical"
-3,"novels, fiction"
-4,"classics, mystery"
-5,classics
-6,novels
-7,"literature, unfinished"
-8,"fiction, unfinished"
-9,classics
-10,"historical, classics"
-11,fiction
-12,"unfinished, literature"
-13,"novels, mystery"
-14,"historical, classics"
-15,literary-fiction
-16,fiction
-17,unfinished
-18,"mystery, literature"
-19,"mystery, literary-fiction"
-20,"novels, fiction"
-21,"historical, mystery"
-22,unfinished
-23,"unfinished, classics"
-24,novels
-25,"classics, unfinished"
-26,crime
-27,"literature, historical"
-28,historical
-29,crime
-30,"historical, unfinished"
-31,"historical, unfinished"
-32,"unfinished, literature"
-33,historical
-34,literature
-35,"unfinished, literature"
-36,historical
-37,mystery
-38,classics
-39,"historical, literary-fiction"
-40,"classics, novels"
-41,novels
-42,fiction
-43,"unfinished, novels"
-44,crime
-45,literature
-46,mystery
-47,historical
-48,classics
-49,fiction
-50,"literary-fiction, crime"
+,transaction_id,borrowed_books_category
+0,1,"literature,crime,historical,childrens,classic"
+1,2,"school,classic,childrens"
+2,3,"childrens,unfinished,novels,crime,mystery"
+3,4,"crime,literature,religion"
+4,5,"unfinished,mystery,fiction,school"
+5,6,religion
+6,7,"crime,historical,literature"
+7,8,"childrens,mystery,literature"
+8,9,"classic,fiction,literature"
+9,10,classic
+10,11,crime
+11,12,"mystery,fiction,religion"
+12,13,"fiction,historical,unfinished,mystery"
+13,14,childrens
+14,15,"mystery,school,novels,childrens"
+15,16,"literature,mystery,novels,classic"
+16,17,"historical,novels,school,literature,unfinished"
+17,18,"literature,unfinished,mystery,school,childrens"
+18,19,"unfinished,fiction"
+19,20,"school,crime,mystery,childrens"
+20,21,"literature,crime,mystery,historical,childrens"
+21,22,"classic,religion,childrens,novels,unfinished"
+22,23,"religion,literature,historical,crime"
+23,24,"religion,mystery"
+24,25,"historical,childrens"
+25,26,"crime,mystery,childrens,classic,literature"
+26,27,"historical,fiction,childrens"
+27,28,"childrens,crime"
+28,29,"novels,literature"
+29,30,"unfinished,mystery,literature,novels"
+30,31,crime
+31,32,"crime,literature"
+32,33,"literature,crime,fiction,religion"
+33,34,"mystery,school,fiction"
+34,35,"childrens,crime,unfinished,classic,novels"
+35,36,"school,novels,childrens"
+36,37,"school,crime,childrens,unfinished"
+37,38,"fiction,school,novels,unfinished"
+38,39,"childrens,religion,fiction"
+39,40,"historical,fiction,mystery,crime"
+40,41,"childrens,mystery"
+41,42,"fiction,childrens,school,literature,crime"
+42,43,"literature,religion,mystery,childrens"
+43,44,"literature,unfinished,mystery,religion"
+44,45,"classic,novels,religion,school"
+45,46,"crime,historical"
+46,47,classic
+47,48,"religion,fiction,unfinished"
+48,49,"mystery,unfinished"
+49,50,"crime,school"

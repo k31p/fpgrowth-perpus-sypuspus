@@ -100,11 +100,7 @@ int main(){
     /**
      * STEP 7: Find each route for eacn category
     */
-    // Routes routes;
-    // for(auto it: item_frequency){
-    //     std::string category = it.first;
-    //     findRoute(fptree, category);
-    // }
+    std::unordered_map<std::string, std::vector<Route>> routes = createRoutePattern(fptree, item_frequency);
 
 
     return 0;
