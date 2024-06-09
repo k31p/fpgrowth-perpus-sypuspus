@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <ncurses.h>
 
 int main(){
     /**
@@ -24,14 +23,12 @@ int main(){
         std::cout << std::endl;
     }
     printf("\n\n");
-    getch();
 
     /**
      * STEP 2: Count item frequency
     */
     Categories item_frequency = countItemFrequency(transactions);
 
-    clear();
     printf("Item Frequency\n");
     printf("==============\n");
     for (auto& it : item_frequency)
@@ -39,7 +36,6 @@ int main(){
         std::cout << "Category: " << it.first << " Frequency: " << it.second << std::endl;
     }
     printf("\n\n");
-    getch();
 
     /**
      * STEP 3: Remove items below minimum support count
