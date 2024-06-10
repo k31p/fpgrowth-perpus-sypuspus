@@ -98,6 +98,8 @@ int main(){
     */
     std::unordered_map<std::string, std::vector<Route>> routes = createRoutePattern(fptree, item_frequency);
 
+    std::unordered_map<std::string, Route> conditionalFPTree = findConditionalFPTree(routes);
+
 
     return 0;
 }

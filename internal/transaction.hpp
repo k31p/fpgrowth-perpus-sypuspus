@@ -22,7 +22,7 @@ std::vector<Transaction> readTransactions(const std::string& filename){
     for(csv::CSVRow& row: reader){
         Transaction transaction;
 
-        transaction.id = row["transaction_number"].get<int>();
+        transaction.id = row["transaction_id"].get<int>();
         transaction.categories = split_string(row["categories"].get<std::string>(), ',');
 
         transactions.push_back(transaction);

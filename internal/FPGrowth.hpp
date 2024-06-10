@@ -145,9 +145,15 @@ void traverseFPNode(const FPNode node, int &level){
     std::cout << " " << node.info << std::endl;
         
     // Call traverse again if childrens not empty
-    level++;
-    for (auto &it: node.childrens){
-        traverseFPNode(it.second, level);
+    if (node.childrens.empty() == false) {
+        level++;
+        for (auto &it: node.childrens){
+            traverseFPNode(it.second, level);
+        }
+    }
+    else {
+        level = 2;
+        return;
     }
 }
 
@@ -222,6 +228,45 @@ std::unordered_map<std::string, std::vector<Route>> createRoutePattern(FPNode &r
     
 
     return routes;
+}
+
+std::unordered_map<std::string, std::vector<std::string>> findConditionalFPTree(
+    const std::unordered_map<std::string, std::vector<Route>>& categoryRoutes) {
+    
+    std::unordered_map<std::string, std::vector<std::string>> result;
+
+    for (const auto& categoryEntry : categoryRoutes) {
+        const std::string& category = categoryEntry.first;
+        const std::vector<Route>& routes = categoryEntry.second;
+        
+        std::unordered_map<std::string, int> frequencyMap;
+
+        // Count the frequency of each string across all routes in this category
+        for (const auto& route : routes) {
+            std::unordered_set<std::string> seenInCurrentRoute;
+            for (const auto& str : route) {
+                // To avoid counting duplicates within the same route
+                if (seenInCurrentRoute.find(str) == seenInCurrentRoute.end()) {
+                    frequencyMap[str]++;
+                    seenInCurrentRoute.insert(str);
+                }
+            }
+        }
+
+        // Collect elements that appear in at least two routes
+        std::vector<std::string> intersection;
+        for (const auto& entry : frequencyMap) {
+            if (entry.second >= 2) {
+                intersection.push_back(entry.first);
+            }
+        }
+
+        if (!intersection.empty()) {
+            result[category] = intersection;
+        }
+    }
+
+    return result;
 }
 
 #endif
