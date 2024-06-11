@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <deque>
 #include <map>
 
 /**
@@ -42,7 +43,11 @@ using Transaction = struct Transaction {
 /**
  * @brief Tipe data struct untuk merepresentasikan data rute setiap kategori
 */
-using Route = std::vector<std::string>;
+using Route = std::deque<std::string>;
+
+using ConditionalPatternBase = std::pair<Route, int>;
+
+using ConditionalFPTree = std::unordered_map<std::string, int>;
 
 
 #endif

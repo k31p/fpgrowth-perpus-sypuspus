@@ -96,9 +96,12 @@ int main(){
     /**
      * STEP 7: Find each route for eacn category
     */
-    std::unordered_map<std::string, std::vector<Route>> routes = createRoutePattern(fptree, item_frequency);
+    std::unordered_map<std::string, std::vector<ConditionalPatternBase>> conditionalPatternBase;
+    std::unordered_map<std::string, std::vector<ConditionalPatternBase>> routes = condPatternBase(fptree, conditionalPatternBase);
 
-    std::unordered_map<std::string, Route> conditionalFPTree = findConditionalFPTree(routes);
+    std::unordered_map<std::string, ConditionalFPTree> conditionalFPTree = condFPTree(routes);
+
+    filterConditionalFPTree(conditionalFPTree);
 
 
     return 0;

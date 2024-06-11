@@ -169,95 +169,36 @@ void traverseFPTree(const FPNode node){
     }
 }
 
-/**
- * @brief Prosedur untuk melakukan pencarian rute secara rekursif, TIDAK UNTUK DIGUNAKAN LANGSUNG!!!
-*/
-void recursiveFindRoute(std::vector<Route> &tempRoutes, FPNode *currentNode, std::vector<std::string> &currentPath, const std::string criteria){
-    if(currentNode == nullptr){
-        return;
-    }
-
-    // Tambah kategori ke dalam path sementara
-    currentPath.push_back(currentNode->info);
-
-    // Cek jika kategori yang dicari ditemukan
-    if(currentNode->info == criteria){
-        // Tambahkan rute ke map
-        tempRoutes.push_back(currentPath);
-        currentNode = nullptr;
-        return;
-    } 
-
-    // Cek jika children pada node mempunyai kategori yang dicari
-    if(currentNode->childrens.find(criteria) != currentNode->childrens.end()){
-        // Langsung tambahkan rute ke map
-        tempRoutes.push_back(currentPath);
-        currentNode = nullptr;
-        return;
-    } else {
-        // Lakukan pencarian ke anak secara rekursif
-        for(auto &it: currentNode->childrens){
-            currentNode = &it.second;
-            recursiveFindRoute(tempRoutes, currentNode, currentPath, criteria);
-        }
-    }
-}
-
-/**
- * @brief Fungsi untuk mencari setiap kemungkinan rute dari suatu kategori
- */
-std::unordered_map<std::string, std::vector<Route>> createRoutePattern(FPNode &rootNode, const Categories categories){
-    // Routes to return later
-    std::unordered_map<std::string, std::vector<Route>> routes;
+std::unordered_map<std::string, ConditionalFPTree> condFPTree(
+    const std::unordered_map<std::string, std::vector<ConditionalPatternBase>>& categoryRoutes) {
     
-    // Loop setiap kategori yang ada
-    for(auto &categoryMap: categories){
-        // Variable to temporarily store routes
-        std::vector<Route> tempRoutes;
-        
-        // Loop every root node's childrens
-        for(auto &nodeMap: rootNode.childrens){
-            FPNode *currentNode = &nodeMap.second;
-            Route currentPath;
-
-            recursiveFindRoute(tempRoutes, currentNode, currentPath, categoryMap.first);
-        }
-
-        routes[categoryMap.first] = tempRoutes;
-    }
-    
-
-    return routes;
-}
-
-std::unordered_map<std::string, std::vector<std::string>> findConditionalFPTree(
-    const std::unordered_map<std::string, std::vector<Route>>& categoryRoutes) {
-    
-    std::unordered_map<std::string, std::vector<std::string>> result;
+    std::unordered_map<std::string, std::unordered_map<std::string, int>> result;
 
     for (const auto& categoryEntry : categoryRoutes) {
         const std::string& category = categoryEntry.first;
-        const std::vector<Route>& routes = categoryEntry.second;
+        const std::vector<ConditionalPatternBase>& conditionalPatternBases = categoryEntry.second;
         
         std::unordered_map<std::string, int> frequencyMap;
 
         // Count the frequency of each string across all routes in this category
-        for (const auto& route : routes) {
+        for (const auto& cpb : conditionalPatternBases) {
+            const Route& route = cpb.first;
+            int routeFrequency = cpb.second;
             std::unordered_set<std::string> seenInCurrentRoute;
             for (const auto& str : route) {
                 // To avoid counting duplicates within the same route
                 if (seenInCurrentRoute.find(str) == seenInCurrentRoute.end()) {
-                    frequencyMap[str]++;
+                    frequencyMap[str] += routeFrequency;
                     seenInCurrentRoute.insert(str);
                 }
             }
         }
 
         // Collect elements that appear in at least two routes
-        std::vector<std::string> intersection;
+        std::unordered_map<std::string, int> intersection;
         for (const auto& entry : frequencyMap) {
-            if (entry.second >= 2) {
-                intersection.push_back(entry.first);
+            if (entry.second > 1) {  // Appears in at least two routes
+                intersection[entry.first] = entry.second;
             }
         }
 
@@ -267,6 +208,63 @@ std::unordered_map<std::string, std::vector<std::string>> findConditionalFPTree(
     }
 
     return result;
+}
+
+void ascendTree(FPNode node, Route &currentRoute) {
+    if (node.parent != nullptr) {
+        if (node.parent->info != "")
+            currentRoute.push_front(node.parent->info);
+        ascendTree(*(node.parent), currentRoute);
+    }
+}
+
+std::unordered_map<std::string, std::vector<ConditionalPatternBase>> condPatternBase(const FPNode tree, std::unordered_map<std::string, std::vector<ConditionalPatternBase>> &conditionalPatternBase) {
+
+    for (auto& map : tree.childrens) {
+
+        Route currentRoute;
+        ConditionalPatternBase currentCdp;
+
+        ascendTree(map.second, currentRoute);
+
+        if (currentRoute.size() > 1) {
+            if (conditionalPatternBase.find(map.first) == conditionalPatternBase.end()) {
+                std::vector<ConditionalPatternBase> temp;
+                conditionalPatternBase[map.first] = temp;
+            }
+            currentCdp.first = currentRoute;
+            currentCdp.second = map.second.frequency;
+            conditionalPatternBase[map.first].push_back(currentCdp);
+        }
+
+        currentRoute.clear();
+
+        condPatternBase(map.second, conditionalPatternBase);
+    }
+
+    return conditionalPatternBase;
+}
+
+void filterConditionalFPTree(std::unordered_map<std::string, ConditionalFPTree> &conditionalFPTree) {
+
+    for (auto& pair : conditionalFPTree) {
+
+        std::vector<std::pair<std::string, int>> conditionalFPTreePair(pair.second.begin(), pair.second.end());
+
+        std::sort(conditionalFPTreePair.begin(), conditionalFPTreePair.end(), [](const std::pair<std::string, int> a, const std::pair<std::string, int> b) {
+            return a.second > b.second;
+        });
+
+        for (auto it = pair.second.begin(); it != pair.second.end(); ) {
+            if (it->first != conditionalFPTreePair[0].first && it->first != conditionalFPTreePair[1].first) {
+                it = pair.second.erase(it);
+            } else {
+                ++it;
+            }
+        }
+
+    }
+
 }
 
 #endif
