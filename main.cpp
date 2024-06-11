@@ -2,6 +2,7 @@
 #include "internal/transaction.hpp"
 #include "internal/FPGrowth.hpp"
 #include "internal/UI.hpp"
+#include "internal/FPTreeView.hpp"
 
 #include <iostream>
 #include <vector>
