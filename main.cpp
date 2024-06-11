@@ -29,6 +29,11 @@ int main(){
     condPatternBase(fpTree, conditionalPatternBase);
 
     //? [6] Defining Conditional FP-Tree
+    std::unordered_map<std::string, ConditionalFPTree> conditionalFPTree = condFPTree(conditionalPatternBase);
+    filterConditionalFPTree(conditionalFPTree);
+
+    //? [7] Defining Rule Sets
+    RuleSets ruleSets = CreateRuleSets(conditionalFPTree);
 
     std::vector<Book> bookData = readBookData("book_data.csv");
     int userInput; //! for handling user input.
