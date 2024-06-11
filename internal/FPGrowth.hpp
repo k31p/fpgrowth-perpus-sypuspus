@@ -135,25 +135,19 @@ FPNode createFPTree(const std::vector<Transaction> &transactions, Categories &it
 /**
  * @brief Print fpnode
 */
-void traverseFPNode(const FPNode node, int &level){
-    // Print garis untuk setiap node
-    std::cout << "|" << std::endl << "| ";
-    for (int stripes = 1; stripes <= level; stripes++){
-        std::cout << "-";
+void traverseFPNode(const FPNode node, const int level){
+    for(int spaces = 0; spaces < level; spaces++){
+        std::cout << "| ";
     }
     
-    std::cout << " " << node.info << std::endl;
+    std::cout << "-> " << node.info << std::endl;
         
     // Call traverse again if childrens not empty
     if (node.childrens.empty() == false) {
-        level++;
+
         for (auto &it: node.childrens){
-            traverseFPNode(it.second, level);
+            traverseFPNode(it.second, level + 1);
         }
-    }
-    else {
-        level = 2;
-        return;
     }
 }
 
@@ -162,9 +156,7 @@ void traverseFPNode(const FPNode node, int &level){
 */
 void traverseFPTree(const FPNode node){
     for(auto &it: node.childrens){
-        int level = 1;
-        std::cout << it.second.info << std::endl;
-        traverseFPNode(it.second, level);
+        traverseFPNode(it.second, 0);
         std::cout << std::endl;
     }
 }
