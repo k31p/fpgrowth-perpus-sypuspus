@@ -7,6 +7,12 @@
 #include <vector>
 #include <unordered_map>
 
+#ifdef _WIN32
+#define Sleep Sleep
+#else
+#define Sleep sleep
+#endif
+
 int main(){
     //! FP-Growth Processing
 
