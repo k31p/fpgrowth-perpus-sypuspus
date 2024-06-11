@@ -41,37 +41,41 @@ int main(){
     //? [7] Defining Rule Sets
     RuleSets ruleSets = CreateRuleSets(conditionalFPTree);
 
+
     std::vector<Book> bookData = readBookData("book_data.csv");
+    Book borrowedBook;
+    std::unordered_map<std::string, std::vector<Book>> recommendedBooks;
     int userInput; //! for handling user input.
 
-    while (true)
-    {
+    
+    while(true) {
         printMainHeader();
         printMainMenu();
-        userInput = inputHandler(1, 3, printMainHeader, printMainMenu);
 
-        switch (userInput)
-        {
-        case 1:
+        userInput = inputHandler(1, 3, "Masukkan Input:", printMainHeader, printMainMenu);
+
+        if (userInput == 1) {
             printPinjamBukuHeader();
             printPinjamBukuMenu();
-            Sleep(3000);
-            continue;
 
-        case 2:
+            userInput = inputHandler(1, 30, "Masukkan No. Buku:", printPinjamBukuHeader, printPinjamBukuMenu);
+            borrowedBook = bookData[userInput - 1];
+        }
+        else if (userInput == 2) {
             printRekomendasiBukuHeader();
-            Sleep(3000);
-            continue;
-
-        case 3:
+            recommendedBooks = GetRecommendation(borrowedBook, bookData, ruleSets);
+            std::cin.get();
+        }
+        else if (userInput == 3) {
             printFPGrowthHeader();
-            Sleep(3000);
-            continue;
-
-        case 4:
+        }
+        else if (userInput == 4) {
             printExitHeader();
             Sleep(3000);
             return 0;
+        }
+        else {
+            continue;
         }
     }
 }

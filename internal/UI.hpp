@@ -85,12 +85,16 @@ void printPinjamBukuMenu() {
     }
 }
 
-int inputHandler(int min_limit, int max_limit, void headerFunction(), void menuFunction()) {
+void printRekomendasiBuku(Book borrowedBook) {
+    std::cout << "Karena anda menyukai " + borrowedBook.title + ", mungkin anda akan menyukai: " << std::endl;
+}
+
+int inputHandler(int min_limit, int max_limit, std::string message, void headerFunction(), void menuFunction()) {
     int userInput = 0;
     
     while (true)
     {
-        std::cout << "Masukkan Input: ";
+        std::cout << message << " ";
         std::cin >> userInput;
 
         if (userInput >= min_limit && userInput <= max_limit) {
@@ -101,7 +105,7 @@ int inputHandler(int min_limit, int max_limit, void headerFunction(), void menuF
             menuFunction();
 
             std::cout << "Invalid Input" << std::endl;
-            std::cout << "Masukkan Input " << min_limit << " - " << max_limit << ": ";
+            std::cout << message << " " << min_limit << " - " << max_limit << ": ";
             std::cin >> userInput;
         }
     }
