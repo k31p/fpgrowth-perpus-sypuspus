@@ -267,4 +267,26 @@ void filterConditionalFPTree(std::unordered_map<std::string, ConditionalFPTree> 
 
 }
 
+RuleSets CreateRuleSets(std::unordered_map<std::string, ConditionalFPTree> conditionalFPTree) {
+
+    RuleSets ruleSets;
+
+    for (auto& it : conditionalFPTree) {
+        for (auto& item : it.second) {
+            std::vector<std::string> temp;
+            
+            if (ruleSets.find(it.first) == ruleSets.end())
+                ruleSets[it.first] = temp;
+
+            if (ruleSets.find(item.first) == ruleSets.end())
+                ruleSets[item.first] = temp;
+            
+            ruleSets[it.first].push_back(item.first);
+            ruleSets[item.first].push_back(it.first);
+        }
+    }
+
+    return ruleSets;
+}
+
 #endif

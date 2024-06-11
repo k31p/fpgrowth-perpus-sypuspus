@@ -103,6 +103,7 @@ int main(){
 
     filterConditionalFPTree(conditionalFPTree);
 
+    RuleSets ruleSets = CreateRuleSets(conditionalFPTree);
 
     return 0;
 }

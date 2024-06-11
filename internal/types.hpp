@@ -49,5 +49,7 @@ using ConditionalPatternBase = std::pair<Route, int>;
 
 using ConditionalFPTree = std::unordered_map<std::string, int>;
 
+using RuleSets = std::unordered_map<std::string, std::vector<std::string>>;
+
 
 #endif
