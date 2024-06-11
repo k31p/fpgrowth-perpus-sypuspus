@@ -11,7 +11,7 @@
 /**
  * @brief Fungsi untuk menghitung frekuensi dari setiap item
  */
-Categories countItemFrequency(const std::vector<Transaction>& transactions){
+Categories countItemSupport(const std::vector<Transaction>& transactions){
     Categories item_frequency;
 
     for (Transaction transaction : transactions)
@@ -218,7 +218,7 @@ void ascendTree(FPNode node, Route &currentRoute) {
     }
 }
 
-std::unordered_map<std::string, std::vector<ConditionalPatternBase>> condPatternBase(const FPNode tree, std::unordered_map<std::string, std::vector<ConditionalPatternBase>> &conditionalPatternBase) {
+void condPatternBase(const FPNode tree, std::unordered_map<std::string, std::vector<ConditionalPatternBase>> &conditionalPatternBase) {
 
     for (auto& map : tree.childrens) {
 
@@ -241,8 +241,6 @@ std::unordered_map<std::string, std::vector<ConditionalPatternBase>> condPattern
 
         condPatternBase(map.second, conditionalPatternBase);
     }
-
-    return conditionalPatternBase;
 }
 
 void filterConditionalFPTree(std::unordered_map<std::string, ConditionalFPTree> &conditionalFPTree) {

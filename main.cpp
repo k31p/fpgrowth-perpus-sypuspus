@@ -1,109 +1,66 @@
 #include "internal/types.hpp"
 #include "internal/transaction.hpp"
 #include "internal/FPGrowth.hpp"
+#include "internal/UI.hpp"
 
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 
 int main(){
-    /**
-     * STEP 1: Read transaction data
-    */
-    std::vector<Transaction> transactions = readTransactions("transaction_data.csv");
+    //! FP-Growth Processing
 
-    printf("Transaction Data\n");
-    printf("===============\n");
-    for (auto& it : transactions)
-    {
-        std::cout << "Transaction ID: " << it.id << std::endl;
-        std::cout << "Categories: ";
-        for (std::string category : it.categories)
-            std::cout << category << " ";
-        std::cout << std::endl;
-    }
-    printf("\n\n");
+    //? [1] Read Transaction Data
+    std::vector<Transaction> transactionData = readTransactions("transaction_data.csv");
 
-    /**
-     * STEP 2: Count item frequency
-    */
-    Categories item_frequency = countItemFrequency(transactions);
+    //? [2] Count Support for Each Item
+    Categories categorySupport = countItemSupport(transactionData);
 
-    printf("Item Frequency\n");
-    printf("==============\n");
-    for (auto& it : item_frequency)
-    {
-        std::cout << "Category: " << it.first << " Frequency: " << it.second << std::endl;
-    }
-    printf("\n\n");
+    //? [3] Transform data by: Eliminating item below min support count, sort data descending by item support
+    Categories categorySupportTransformed = removeItemsBelowMinimumSupportCount(categorySupport);
+    std::vector<Transaction> transactionDataTransformed = eliminateTransactionsCategoriesBelowMinimumSupportCount(transactionData, categorySupportTransformed);
+    sortTransactionItemsByFrequency(transactionDataTransformed, categorySupport);
 
-    /**
-     * STEP 3: Remove items below minimum support count
-    */
-    item_frequency = removeItemsBelowMinimumSupportCount(item_frequency);
+    //? [4] Constructing FP-Tree
+    FPNode fpTree = createFPTree(transactionDataTransformed, categorySupportTransformed);
 
-    printf("Item Frequency (After Removing Items Below Minimum Support Count)\n");
-    printf("===============================================================\n");
-    for (auto& it : item_frequency)
-    {
-        std::cout << "Category: " << it.first << " Frequency: " << it.second << std::endl;
-    }
-    printf("\n\n");
-    
-    /**
-     * STEP 4: Eliminate transactions categories below minimum support count
-    */
-    transactions = eliminateTransactionsCategoriesBelowMinimumSupportCount(transactions, item_frequency);
-
-    printf("Transaction Data (After Eliminating Transactions Categories Below Minimum Support Count)\n");
-    printf("=========================================================================================\n");
-    for (auto& it : transactions)
-    {
-        std::cout << "Transaction ID: " << it.id << std::endl;
-        std::cout << "Categories: ";
-        for (std::string category : it.categories)
-            std::cout << category << " ";
-        std::cout << std::endl;
-    }
-    printf("\n\n");
-
-    /**
-     * STEP 5: Sort transactions by frequency
-    */   
-    sortTransactionItemsByFrequency(transactions, item_frequency);
-
-    printf("Transaction Data (After Sorting Transactions by Frequency)\n");
-    printf("=========================================================\n");
-    for(Transaction transaction: transactions){
-        std::cout << "Transaction ID: " << transaction.id << std::endl;
-        std::cout << "Categories: ";
-        for(std::string category: transaction.categories)
-            std::cout << category << " ";
-        std::cout << std::endl;
-    }
-    printf("\n\n");
-
-    /**
-     * STEP 6: Construct FPTree
-    */
-    FPNode fptree = createFPTree(transactions, item_frequency);
-
-    printf("FPTree\n");
-    printf("======\n");
-    traverseFPTree(fptree);
-    printf("\n\n");
-
-    /**
-     * STEP 7: Find each route for eacn category
-    */
+    //? [5] Defining Conditional Pattern Base
     std::unordered_map<std::string, std::vector<ConditionalPatternBase>> conditionalPatternBase;
-    std::unordered_map<std::string, std::vector<ConditionalPatternBase>> routes = condPatternBase(fptree, conditionalPatternBase);
+    condPatternBase(fpTree, conditionalPatternBase);
 
-    std::unordered_map<std::string, ConditionalFPTree> conditionalFPTree = condFPTree(routes);
+    //? [6] Defining Conditional FP-Tree
 
-    filterConditionalFPTree(conditionalFPTree);
+    std::vector<Book> bookData = readBookData("book_data.csv");
+    int userInput; //! for handling user input.
 
-    RuleSets ruleSets = CreateRuleSets(conditionalFPTree);
+    while (true)
+    {
+        printMainHeader();
+        printMainMenu();
+        userInput = inputHandler(1, 3, printMainHeader, printMainMenu);
 
-    return 0;
+        switch (userInput)
+        {
+        case 1:
+            printPinjamBukuHeader();
+            printPinjamBukuMenu();
+            Sleep(3000);
+            continue;
+
+        case 2:
+            printRekomendasiBukuHeader();
+            Sleep(3000);
+            continue;
+
+        case 3:
+            printFPGrowthHeader();
+            Sleep(3000);
+            continue;
+
+        case 4:
+            printExitHeader();
+            Sleep(3000);
+            return 0;
+        }
+    }
 }
