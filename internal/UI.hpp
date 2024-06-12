@@ -6,12 +6,20 @@
 #include <iostream>
 #include <vector>
 
+void clearScreen(){
+    #ifdef _WIN32
+    system("cls");
+    #else
+    system("clear");
+    #endif
+}
+
 void println(std::string string) {
     std::cout << string << std::endl;
 }
 
 void printMainHeader() {
-    system("cls");
+    clearScreen();
     std::cout << "========================================\n";
     std::cout << " ___  _ _  ___  _ _  ___  ___  _ _  ___ \n";
     std::cout << "/ __>| | || . \\| | |/ __>| . \\| | |/ __>\n";
@@ -22,7 +30,7 @@ void printMainHeader() {
 }
 
 void printPinjamBukuHeader() {
-    system("cls");
+    clearScreen();
     std::cout << "=================================================\n";
     std::cout << " ___  _       _               ___       _        \n";
     std::cout << "| . \\<_>._ _ <_> ___ ._ _ _  | . > _ _ | |__ _ _ \n";
@@ -33,7 +41,7 @@ void printPinjamBukuHeader() {
 }
 
 void printRekomendasiBukuHeader() {
-    system("cls");
+    clearScreen();
     std::cout << "============================================================================\n";
     std::cout << " ___       _                            _           _   ___       _        \n";
     std::cout << "| . \\ ___ | |__ ___ ._ _ _  ___ ._ _  _| | ___  ___<_> | . > _ _ | |__ _ _ \n";
@@ -44,7 +52,7 @@ void printRekomendasiBukuHeader() {
 }
 
 void printFPGrowthHeader() {
-    system("cls");
+    clearScreen();
     std::cout << "=========================================================\n";
     std::cout << " ___  ___       ___                     _    _           \n";
     std::cout << "| __>| . \\ ___ /  _>  _ _  ___  _ _ _ _| |_ | |_         \n";
@@ -55,7 +63,7 @@ void printFPGrowthHeader() {
 }
 
 void printExitHeader() {
-    system("cls");
+    clearScreen();
     std::cout << "==================================================\n";
     std::cout << " ___  _              _     _ _                   \n";
     std::cout << "|_ _|| |_  ___ ._ _ | |__ | | | ___  _ _         \n";

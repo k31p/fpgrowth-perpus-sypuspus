@@ -1,4 +1,5 @@
 #include "internal/types.hpp"
+#include "internal/helper.hpp"
 #include "internal/transaction.hpp"
 #include "internal/FPGrowth.hpp"
 #include "internal/UI.hpp"
@@ -7,7 +8,6 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <conio.h>
 
 #ifdef _WIN32
 #define Sleep Sleep
@@ -69,9 +69,7 @@ int main(){
             printRekomendasiBukuHeader();
             printRekomendasiBuku(borrowedBookPtr, bookData, ruleSets);
 
-            std::cout << "[KLIK ENTER UNTUK MELANJUTKAN]." << std::endl;
-            std::cin.ignore();
-            std::cin.clear();
+            pressAnyKey();
         }
         else if (userInput == 3) {
             printFPGrowthHeader();
@@ -82,45 +80,38 @@ int main(){
             if (userInput == 1) {
                 printFPGrowthHeader();
                 printTransactionData(transactionData);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 2) {
                 printFPGrowthHeader();
                 printCategorySupport(categorySupport);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 3) {
                 printFPGrowthHeader();
                 printCategorySupport(categorySupportTransformed);
                 printTransactionData(transactionDataTransformed);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 4) {
                 printFPGrowthHeader();
                 printFPTree(fpTree);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 5) {
                 printFPGrowthHeader();
                 printTransactionData(transactionDataTransformed);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 6) {
                 printFPGrowthHeader();
                 printConditionalPatternBase(conditionalPatternBase);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
             else if (userInput == 7) {
                 printFPGrowthHeader();
                 printRuleSets(ruleSets);
-                std::cin.ignore();
-                std::cin.clear();
+                pressAnyKey();
             }
         }
         else if (userInput == 4) {

@@ -33,4 +33,16 @@ std::vector<std::string> split_string(const std::string& string_line, char delim
     return tokens;
 }
 
+/**
+ * @brief Method untuk menyimulasikan "press any key to continue"
+*/
+void pressAnyKey()
+{
+    #ifdef _WIN32
+    system("pause");
+    #else
+    system("read");
+    #endif
+}
+
 #endif 
