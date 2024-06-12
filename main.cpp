@@ -68,6 +68,7 @@ int main(){
         }
         else if (userInput == 3) {
             printFPGrowthHeader();
+            printRuleSets(ruleSets);
         }
         else if (userInput == 4) {
             printExitHeader();

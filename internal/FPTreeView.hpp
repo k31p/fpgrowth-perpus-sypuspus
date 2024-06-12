@@ -27,6 +27,35 @@ void printCategorySupport(const Categories &categorySupport){
     }
 }
 
+/**
+ * @brief Print fpnode
+*/
+void traverseFPNode(const FPNode node, const int level){
+    for(int spaces = 0; spaces < level; spaces++){
+        std::cout << "| ";
+    }
+    
+    std::cout << "-> " << node.info << std::endl;
+        
+    // Call traverse again if childrens not empty
+    if (node.childrens.empty() == false) {
+
+        for (auto &it: node.childrens){
+            traverseFPNode(it.second, level + 1);
+        }
+    }
+}
+
+/**
+ * @brief Print fptree
+*/
+void printFPTree(const FPNode node){
+    for(auto &it: node.childrens){
+        traverseFPNode(it.second, 0);
+        std::cout << std::endl;
+    }
+}
+
 void printConditionalPatternBase(const std::unordered_map<std::string, std::vector<ConditionalPatternBase>> &conditionalPatternBase)
 {
     std::cout << "Conditional Pattern Base: " << std::endl;
@@ -43,6 +72,20 @@ void printConditionalPatternBase(const std::unordered_map<std::string, std::vect
             }
             std::cout << std::endl;
         }
+    }
+}
+
+void printRuleSets(const RuleSets &ruleSets)
+{
+    std::cout << "Rule Sets: " << std::endl;
+    for (auto it = ruleSets.begin(); it != ruleSets.end(); it++)
+    {
+        std::cout << "Category: " << it->first << std::endl;
+        for (std::string category : it->second)
+        {
+            std::cout << category << " ";
+        }
+        std::cout << std::endl;
     }
 }
 
