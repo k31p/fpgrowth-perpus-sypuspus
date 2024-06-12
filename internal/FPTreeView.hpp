@@ -75,6 +75,20 @@ void printConditionalPatternBase(const std::unordered_map<std::string, std::vect
     }
 }
 
+void printConditionalFPTree(const std::unordered_map<std::string, ConditionalFPTree> &conditionalFPTree) {
+    std::cout << "Conditional FP-Tree: " << std::endl;
+    for (auto it = conditionalFPTree.begin(); it != conditionalFPTree.end(); it++)
+    {
+        std::cout << "Category: " << it->first << std::endl;
+        for (auto& cfp : it->second)
+        {
+            std::cout << "Total support for this route: " << cfp.second << std::endl;
+            std::cout << "Item: " << cfp.first << std::endl;
+            std::cout << std::endl;
+        }
+    }
+}
+
 void printRuleSets(const RuleSets &ruleSets)
 {
     std::cout << "Rule Sets: " << std::endl;

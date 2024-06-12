@@ -1,31 +1,56 @@
 Title,Author,Genre
-To Kill a Mockingbird,Harper Lee,literature
-Pride and Prejudice,Jane Austen,literature
-1984,George Orwell,literature
-The Great Gatsby,F. Scott Fitzgerald,literature
-The Catcher in the Rye,J.D. Salinger,literature
-Harry Potter and the Philosopher's Stone,J.K. Rowling,fiction
-The Hobbit,J.R.R. Tolkien,fiction
-The Alchemist,Paulo Coelho,fiction
-The Da Vinci Code,Dan Brown,fiction
-The Kite Runner,Khaled Hosseini,fiction
-The Girl with the Dragon Tattoo,Stieg Larsson,mystery
-Gone Girl,Gillian Flynn,mystery
-The Hound of the Baskervilles,Arthur Conan Doyle,mystery
-The Girl on the Train,Paula Hawkins,mystery
-And Then There Were None,Agatha Christie,mystery
-The Pillars of the Earth,Ken Follett,historical
-All the Light We Cannot See,Anthony Doerr,historical
-The Book Thief,Markus Zusak,historical
-The Nightingale,Kristin Hannah,historical
-The Help,Kathryn Stockett,historical
-The Godfather,Mario Puzo,crime
+1984,George Orwell,classic
+Dracula,Bram Stoker,classic
+Pride and Prejudice,Jane Austen,classic
+The Catcher in the Rye,J.D. Salinger,classic
+To Kill a Mockingbird,Harper Lee,classic
+Crime and Punishment,Fyodor Dostoevsky,crime
+Murder on the Orient Express,Agatha Christie,crime
+Sherlock Holmes,Arthur Conan Doyle,crime
+The Girl with the Dragon Tattoo,Stieg Larsson,crime
 The Silence of the Lambs,Thomas Harris,crime
-The Talented Mr. Ripley,Patricia Highsmith,crime
-In Cold Blood,Truman Capote,crime
-The Big Sleep,Raymond Chandler,crime
-Harry Potter and the Philosopher's Stone,J.K. Rowling,childrens
-Alice's Adventures in Wonderland,Lewis Carroll,childrens
 Charlotte's Web,E.B. White,childrens
+Harry Potter and the Sorcerer's Stone,J.K. Rowling,childrens
 Matilda,Roald Dahl,childrens
 The Chronicles of Narnia,C.S. Lewis,childrens
+Winnie the Pooh,A.A. Milne,childrens
+A Tale of Two Cities,Charles Dickens,historical
+Gone with the Wind,Margaret Mitchell,historical
+Les Misérables,Victor Hugo,historical
+The Book Thief,Markus Zusak,historical
+War and Peace,Leo Tolstoy,historical
+Brave New World,Aldous Huxley,literature
+Jane Eyre,Charlotte Brontë,literature
+The Great Gatsby,F. Scott Fitzgerald,literature
+The Picture of Dorian Gray,Oscar Wilde,literature
+Wuthering Heights,Emily Brontë,literature
+Left unfinished,Author Unknown,unfinished
+The unfinished tales,J.R.R. Tolkien,unfinished
+Unfinished Portrait,Agatha Christie,unfinished
+Unfinished Symphony,Virginia Andrews,unfinished
+Unfinished Story,Author Unknown,unfinished
+The Da Vinci Code,Dan Brown,mystery
+The Girl on the Train,Paula Hawkins,mystery
+The Shining,Stephen King,mystery
+The Woman in White,Wilkie Collins,mystery
+Rebecca,Daphne du Maurier,mystery
+The Bible,Various Authors,religion
+The Quran,Various Authors,religion
+The Bhagavad Gita,Various Authors,religion
+The Tao Te Ching,Laozi,religion
+The Torah,Various Authors,religion
+Anne of Green Gables,Lucy Maud Montgomery,school
+Goodbye, Mr. Chips,James Hilton,school
+The Catcher in the Rye,J.D. Salinger,school
+The School for Good and Evil,Soman Chainani,school
+The Secret History,Donna Tartt,school
+1984,George Orwell,novels
+The Hobbit,J.R.R. Tolkien,novels
+The Kite Runner,Khaled Hosseini,novels
+The Road,Cormac McCarthy,novels
+Ulysses,James Joyce,novels
+The Alchemist,Paulo Coelho,fiction
+Life of Pi,Yann Martel,fiction
+The Great Gatsby,F. Scott Fitzgerald,fiction
+The Handmaid's Tale,Margaret Atwood,fiction
+To Kill a Mockingbird,Harper Lee,fiction

@@ -53,14 +53,14 @@ int main(){
         printMainHeader();
         printMainMenu();
 
-        userInput = inputHandler(1, 3, "Masukkan Input:", printMainHeader, printMainMenu);
+        userInput = inputHandler(1, 4, "Masukkan Input:", printMainHeader, printMainMenu);
         fflush(stdin);
 
         if (userInput == 1) {
             printPinjamBukuHeader();
             printPinjamBukuMenu();
 
-            userInput = inputHandler(1, 30, "Masukkan No. Buku:", printPinjamBukuHeader, printPinjamBukuMenu);
+            userInput = inputHandler(1, 54, "Masukkan No. Buku:", printPinjamBukuHeader, printPinjamBukuMenu);
             borrowedBook = bookData[userInput - 1];
             borrowedBookPtr = &borrowedBook;
             std::cin.clear();
@@ -75,7 +75,7 @@ int main(){
             printFPGrowthHeader();
             printFPGrowthMenu();
 
-            userInput = inputHandler(1, 6, "Masukkan Input:", printFPGrowthHeader, printFPGrowthMenu);
+            userInput = inputHandler(1, 7, "Masukkan Input:", printFPGrowthHeader, printFPGrowthMenu);
 
             if (userInput == 1) {
                 printFPGrowthHeader();
@@ -89,7 +89,6 @@ int main(){
             }
             else if (userInput == 3) {
                 printFPGrowthHeader();
-                printCategorySupport(categorySupportTransformed);
                 printTransactionData(transactionDataTransformed);
                 pressAnyKey();
             }
@@ -100,12 +99,12 @@ int main(){
             }
             else if (userInput == 5) {
                 printFPGrowthHeader();
-                printTransactionData(transactionDataTransformed);
+                printConditionalPatternBase(conditionalPatternBase);
                 pressAnyKey();
             }
             else if (userInput == 6) {
                 printFPGrowthHeader();
-                printConditionalPatternBase(conditionalPatternBase);
+                printConditionalFPTree(conditionalFPTree);
                 pressAnyKey();
             }
             else if (userInput == 7) {

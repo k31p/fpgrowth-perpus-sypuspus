@@ -79,7 +79,7 @@ void printMainMenu() {
     println("[1] Pinjam Buku");
     println("[2] Rekomendasi Buku");
     println("[3] View FP-Growth Algorithm");
-    println("[4] View FP-Growth Algorithm");
+    println("[4] Exit");
 }
 
 void printPinjamBukuMenu() {
@@ -100,16 +100,22 @@ void printRekomendasiBuku(Book *borrowedBook, std::vector<Book> bookData, RuleSe
         return;
     }
     
-    std::cout << "Karena anda menyukai " + (*borrowedBook).title + ", mungkin anda akan menyukai: " << std::endl;
 
     std::unordered_map<std::string, std::vector<Book>> recommendedBooks = GetRecommendation((*borrowedBook), bookData, ruleSets);
 
-    for (auto& recommendedBook : recommendedBooks) {
-        std::cout << "Buku " << recommendedBook.first << ": " << std::endl;
-        for (auto& book : recommendedBook.second) {
-            std::cout << "\t - " << book.title << " | " << book.author << std::endl;
+    if (recommendedBooks.size() > 0) {
+        std::cout << "Karena anda menyukai " + (*borrowedBook).title + ", mungkin anda akan menyukai: " << std::endl;
+
+        for (auto& recommendedBook : recommendedBooks) {
+            std::cout << "Buku " << recommendedBook.first << ": " << std::endl;
+            for (auto& book : recommendedBook.second) {
+                std::cout << "\t - " << book.title << " | " << book.author << std::endl;
+            }
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
+    }
+    else {
+        std::cout << "Tidak ada rekomendasi untuk " + (*borrowedBook).title << std::endl;
     }
 }
 
