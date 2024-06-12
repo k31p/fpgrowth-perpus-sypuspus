@@ -71,6 +71,7 @@ void printMainMenu() {
     println("[1] Pinjam Buku");
     println("[2] Rekomendasi Buku");
     println("[3] View FP-Growth Algorithm");
+    println("[4] View FP-Growth Algorithm");
 }
 
 void printPinjamBukuMenu() {
@@ -85,10 +86,15 @@ void printPinjamBukuMenu() {
     }
 }
 
-void printRekomendasiBuku(Book borrowedBook, std::vector<Book> bookData, RuleSets ruleSets) {
-    std::cout << "Karena anda menyukai " + borrowedBook.title + ", mungkin anda akan menyukai: " << std::endl;
+void printRekomendasiBuku(Book *borrowedBook, std::vector<Book> bookData, RuleSets ruleSets) {
+    if (borrowedBook == nullptr) {
+        std::cout << "Anda belum meminjam buku apapun." << std::endl;
+        return;
+    }
+    
+    std::cout << "Karena anda menyukai " + (*borrowedBook).title + ", mungkin anda akan menyukai: " << std::endl;
 
-    std::unordered_map<std::string, std::vector<Book>> recommendedBooks = GetRecommendation(borrowedBook, bookData, ruleSets);
+    std::unordered_map<std::string, std::vector<Book>> recommendedBooks = GetRecommendation((*borrowedBook), bookData, ruleSets);
 
     for (auto& recommendedBook : recommendedBooks) {
         std::cout << "Buku " << recommendedBook.first << ": " << std::endl;
@@ -97,6 +103,16 @@ void printRekomendasiBuku(Book borrowedBook, std::vector<Book> bookData, RuleSet
         }
         std::cout << std::endl;
     }
+}
+
+void printFPGrowthMenu() {
+    println("[1] Sumber Data");
+    println("[2] Counting Support Item");
+    println("[3] Transformed Data");
+    println("[4] View FP-Tree");
+    println("[5] View Conditional Pattern Base");
+    println("[6] View Conditional FPTree");
+    println("[7] View Frequent Pattern Generated");
 }
 
 int inputHandler(int min_limit, int max_limit, std::string message, void headerFunction(), void menuFunction()) {
@@ -117,6 +133,7 @@ int inputHandler(int min_limit, int max_limit, std::string message, void headerF
             std::cout << "Invalid Input" << std::endl;
             std::cout << message << " " << min_limit << " - " << max_limit << ": ";
             std::cin >> userInput;
+            std::cin.clear();            
         }
     }
     

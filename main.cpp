@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <conio.h>
 
 #ifdef _WIN32
 #define Sleep Sleep
@@ -45,6 +46,7 @@ int main(){
 
     std::vector<Book> bookData = readBookData("book_data.csv");
     Book borrowedBook = {"awikwok", "uhuy", "mystery"};
+    Book *borrowedBookPtr = NULL;
     int userInput; //! for handling user input.
 
     while(true) {
@@ -60,14 +62,66 @@ int main(){
 
             userInput = inputHandler(1, 30, "Masukkan No. Buku:", printPinjamBukuHeader, printPinjamBukuMenu);
             borrowedBook = bookData[userInput - 1];
-            fflush(stdin);
+            borrowedBookPtr = &borrowedBook;
+            std::cin.clear();
         }
         else if (userInput == 2) {
             printRekomendasiBukuHeader();
-            printRekomendasiBuku(borrowedBook, bookData, ruleSets);
+            printRekomendasiBuku(borrowedBookPtr, bookData, ruleSets);
+
+            std::cout << "[KLIK ENTER UNTUK MELANJUTKAN]." << std::endl;
+            std::cin.ignore();
+            std::cin.clear();
         }
         else if (userInput == 3) {
             printFPGrowthHeader();
+            printFPGrowthMenu();
+
+            userInput = inputHandler(1, 6, "Masukkan Input:", printFPGrowthHeader, printFPGrowthMenu);
+
+            if (userInput == 1) {
+                printFPGrowthHeader();
+                printTransactionData(transactionData);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 2) {
+                printFPGrowthHeader();
+                printCategorySupport(categorySupport);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 3) {
+                printFPGrowthHeader();
+                printCategorySupport(categorySupportTransformed);
+                printTransactionData(transactionDataTransformed);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 4) {
+                printFPGrowthHeader();
+                traverseFPTree(fpTree);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 5) {
+                printFPGrowthHeader();
+                printTransactionData(transactionDataTransformed);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 6) {
+                printFPGrowthHeader();
+                printConditionalPatternBase(conditionalPatternBase);
+                std::cin.ignore();
+                std::cin.clear();
+            }
+            else if (userInput == 7) {
+                printFPGrowthHeader();
+                
+                std::cin.ignore();
+                std::cin.clear();
+            }
         }
         else if (userInput == 4) {
             printExitHeader();

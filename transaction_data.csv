@@ -1,4 +1,4 @@
-transaction_id,borrowed_books_category
+transaction_id,categories
 1,"literature,crime,historical,childrens,classic"
 2,"school,classic,childrens"
 3,"childrens,unfinished,novels,crime,mystery"
