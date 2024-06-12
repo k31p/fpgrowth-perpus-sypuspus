@@ -132,35 +132,6 @@ FPNode createFPTree(const std::vector<Transaction> &transactions, Categories &it
     return rootNode;
 }
 
-/**
- * @brief Print fpnode
-*/
-void traverseFPNode(const FPNode node, const int level){
-    for(int spaces = 0; spaces < level; spaces++){
-        std::cout << "| ";
-    }
-    
-    std::cout << "-> " << node.info << std::endl;
-        
-    // Call traverse again if childrens not empty
-    if (node.childrens.empty() == false) {
-
-        for (auto &it: node.childrens){
-            traverseFPNode(it.second, level + 1);
-        }
-    }
-}
-
-/**
- * @brief Print fptree
-*/
-void traverseFPTree(const FPNode node){
-    for(auto &it: node.childrens){
-        traverseFPNode(it.second, 0);
-        std::cout << std::endl;
-    }
-}
-
 std::unordered_map<std::string, ConditionalFPTree> condFPTree(
     const std::unordered_map<std::string, std::vector<ConditionalPatternBase>>& categoryRoutes) {
     
