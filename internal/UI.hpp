@@ -85,8 +85,18 @@ void printPinjamBukuMenu() {
     }
 }
 
-void printRekomendasiBuku(Book borrowedBook) {
+void printRekomendasiBuku(Book borrowedBook, std::vector<Book> bookData, RuleSets ruleSets) {
     std::cout << "Karena anda menyukai " + borrowedBook.title + ", mungkin anda akan menyukai: " << std::endl;
+
+    std::unordered_map<std::string, std::vector<Book>> recommendedBooks = GetRecommendation(borrowedBook, bookData, ruleSets);
+
+    for (auto& recommendedBook : recommendedBooks) {
+        std::cout << "Buku " << recommendedBook.first << ": " << std::endl;
+        for (auto& book : recommendedBook.second) {
+            std::cout << "\t - " << book.title << " | " << book.author << std::endl;
+        }
+        std::cout << std::endl;
+    }
 }
 
 int inputHandler(int min_limit, int max_limit, std::string message, void headerFunction(), void menuFunction()) {

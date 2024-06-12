@@ -44,16 +44,15 @@ int main(){
 
 
     std::vector<Book> bookData = readBookData("book_data.csv");
-    Book borrowedBook;
-    std::unordered_map<std::string, std::vector<Book>> recommendedBooks;
+    Book borrowedBook = {"awikwok", "uhuy", "mystery"};
     int userInput; //! for handling user input.
 
-    
     while(true) {
         printMainHeader();
         printMainMenu();
 
         userInput = inputHandler(1, 3, "Masukkan Input:", printMainHeader, printMainMenu);
+        fflush(stdin);
 
         if (userInput == 1) {
             printPinjamBukuHeader();
@@ -61,11 +60,11 @@ int main(){
 
             userInput = inputHandler(1, 30, "Masukkan No. Buku:", printPinjamBukuHeader, printPinjamBukuMenu);
             borrowedBook = bookData[userInput - 1];
+            fflush(stdin);
         }
         else if (userInput == 2) {
             printRekomendasiBukuHeader();
-            recommendedBooks = GetRecommendation(borrowedBook, bookData, ruleSets);
-            std::cin.get();
+            printRekomendasiBuku(borrowedBook, bookData, ruleSets);
         }
         else if (userInput == 3) {
             printFPGrowthHeader();

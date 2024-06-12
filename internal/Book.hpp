@@ -29,11 +29,17 @@ std::unordered_map<std::string, std::vector<Book>> GetRecommendation(Book borrow
     std::vector<std::string> recommendedCategories = ruleSets[borrowedBook.genre];
 
     for (auto& category : recommendedCategories) {
+        if (recommendedBooks.find(category) == recommendedBooks.end()) {
+            std::vector<Book> temp;
+            recommendedBooks[category] = temp;
+        }
 
         std::vector<Book> categoryFilterer;
-        recommendedBooks[category] = categoryFilterer;
 
-        std::copy_if(bookData.begin(), bookData.end(), std::back_inserter(recommendedBooks[category]), [&category](const Book book) {return book.genre == category;});
+        std::copy_if(bookData.begin(), bookData.end(), std::back_inserter(categoryFilterer), [&category](const Book book) {return book.genre == category;});
+
+        recommendedBooks[category] = categoryFilterer;
+        categoryFilterer.clear();
     }
 
     return recommendedBooks;
