@@ -100,7 +100,7 @@ int main(){
             }
             else if (userInput == 4) {
                 printFPGrowthHeader();
-                traverseFPTree(fpTree);
+                printFPTree(fpTree);
                 std::cin.ignore();
                 std::cin.clear();
             }
@@ -118,7 +118,7 @@ int main(){
             }
             else if (userInput == 7) {
                 printFPGrowthHeader();
-                
+                printRuleSets(ruleSets);
                 std::cin.ignore();
                 std::cin.clear();
             }
